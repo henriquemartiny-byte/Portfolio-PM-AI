@@ -13,9 +13,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Alex Sendra | AI Product Manager & Designer",
-  description: "Portfólio interativo de Alex Sendra. Criando interfaces inteligentes, agentes autônomos e produtos de IA de ponta.",
-  keywords: ["AI Product Manager", "AI Designer", "Interactive Portfolio", "UX Design", "Next.js", "Framer Motion"],
+  title: "Henrique Martiny | AI Product Manager & Designer",
+  description: "Portfólio interativo de Henrique Martiny, especializado em Product Management, UX Design e Inteligência Artificial Gerativa.",
 };
 
 export default function RootLayout({

@@ -175,6 +175,23 @@ export const portfolioData: PortfolioData = {
           "Agente de IA processando densidade de copa...",
           "Análise concluída: Área estável. Créditos de carbono calculados.",
         ],
+      },
+      {
+        title: "AI-Powered Vibe Coding Portfolio",
+        description: "Arquitetura e deploy de um portfólio interativo utilizando agentes autônomos de IA (Antigravity). Foco em engenharia de prompt cirúrgica para otimização de tokens, componentização em Next.js e esteira automatizada de CI/CD via Vercel.",
+        codeSnippet: `// Otimização de contexto para o agente de IA
+const deployToProduction = async (codebase) => {
+  const optimizedPrompt = promptBudget.minimizeTokens(codebase.thinking);
+  const build = await antigravity.executeRefactor(optimizedPrompt);
+  return vercel.triggerAutomatedDeploy(build);
+};`,
+        logs: [
+          "Inicializando ambiente de Vibe Coding no Antigravity...",
+          "Refatorando layout do HeroCard para estrutura horizontal adaptativa...",
+          "Otimizando prompts de entrada para economia de tokens no plano Google AI Pro...",
+          "Sincronizando repositório com o GitHub...",
+          "Deploy concluído com sucesso na Vercel: https://portfolio-pm-ai.vercel.app/"
+        ],
       }
     ]
   }

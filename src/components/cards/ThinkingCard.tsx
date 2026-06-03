@@ -19,7 +19,7 @@ export default function ThinkingCard({ delay = 0 }: { delay?: number }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
-    <BentoCard className="col-span-12 md:col-span-6 min-h-[460px]" delay={delay}>
+    <BentoCard className="col-span-12 md:col-span-5 min-h-[460px]" delay={delay}>
       <div className="flex flex-col h-full justify-between space-y-4">
         {/* Cabeçalho */}
         <div className="space-y-1">
