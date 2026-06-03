@@ -1,32 +1,57 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Code2, Terminal, ChevronLeft, ChevronRight, Sliders, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Sparkles, Code2, Terminal, ChevronLeft, ChevronRight, Sliders, CheckCircle2, AlertTriangle, ArrowUpRight } from 'lucide-react';
 import BentoCard from '../BentoCard';
 
 export default function LabCard({ delay = 0 }: { delay?: number }) {
   const [activeTab, setActiveTab] = useState<'preview' | 'code' | 'console'>('preview');
+  const [activeExpIndex, setActiveExpIndex] = useState(0);
   const [promptComplexity, setPromptComplexity] = useState<number>(40);
   const [isSimulating, setIsSimulating] = useState(false);
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
 
-  // O seu portfólio como o case original e principal neste momento
-  const caseData = {
-    title: "AI-Powered Vibe Coding Portfolio",
-    description: "Arquitetura e deploy de um portfólio interativo utilizando agentes autônomos de IA (Antigravity). Foco em engenharia de prompt cirúrgica para otimização de tokens, componentização em Next.js e esteira automatizada de CI/CD via Vercel.",
-    code: `// Otimização de contexto para o agente de IA
+  // Acervo de experimentos do Lab
+  const experiments = [
+    {
+      title: "AI-Powered Vibe Coding Portfolio",
+      description: "Arquitetura e deploy de um portfólio interativo utilizando agentes autônomos de IA (Antigravity). Foco em engenharia de prompt cirúrgica para otimização de tokens, componentização em Next.js e esteira automatizada de CI/CD via Vercel.",
+      code: `// Otimização de contexto para o agente de IA
 const deployToProduction = async (codebase) => {
   const optimizedPrompt = promptBudget.minimizeTokens(codebase.thinking);
   const build = await antigravity.executeRefactor(optimizedPrompt);
   return vercel.triggerAutomatedDeploy(build);
 };`,
-    logs: [
-      "Inicializando ambiente de Vibe Coding no Antigravity...",
-      "Refatorando layout do HeroCard para estrutura horizontal adaptativa...",
-      "Otimizando prompts de entrada para economia de tokens no plano Google AI Pro...",
-      "Sincronizando repositório com o GitHub...",
-      "Deploy concluído com sucesso na Vercel: https://portfolio-pm-ai.vercel.app/"
-    ]
-  };
+      logs: [
+        "Inicializando ambiente de Vibe Coding no Antigravity...",
+        "Refatorando layout do HeroCard para estrutura horizontal adaptativa...",
+        "Otimizando prompts de entrada para economia de tokens no plano Google AI Pro...",
+        "Sincronizando repositório com o GitHub...",
+        "Deploy concluído com sucesso na Vercel: https://portfolio-pm-ai.vercel.app/"
+      ]
+    },
+    {
+      title: "Vinyl AI Collection Hub",
+      description: "Arquitetura Jamstack híbrida com Spotify e Gemini para catalogar Meu acervos de discos de Vinil para recomendações baseadas em prompts com custo zero de produção.",
+      slug: "catalogo-vinyl",
+      code: `// Integração do Sommelier com a API do Spotify
+const getVinylDetails = async (album, artist) => {
+  const meta = await spotify.searchAlbum(album, artist);
+  const wiki = await wikipedia.getSummary(album, artist);
+  const story = await gemini.generateStory(album, artist, wiki);
+  return { ...meta, story };
+};`,
+      logs: [
+        "Inicializando módulo de catalogação física...",
+        "Autenticando na API do Spotify com credenciais de cliente...",
+        "Conectando com o modelo Gemini 2.5 Flash...",
+        "Indexando banco local via collection.json...",
+        "Vinyl AI Sommelier pronto para receber interações."
+      ]
+    }
+  ];
+
+  const caseData = experiments[activeExpIndex];
 
   const handleRunSimulation = () => {
     setIsSimulating(true);
@@ -65,11 +90,23 @@ const deployToProduction = async (codebase) => {
           
           {/* Controles de navegação (Estilo Carrossel) */}
           <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto bg-neutral-900/40 p-1.5 rounded-xl border border-neutral-900">
-            <button className="p-1.5 rounded-lg bg-neutral-950 text-neutral-700 cursor-not-allowed" disabled>
+            <button
+              onClick={() => setActiveExpIndex(0)}
+              className={`p-1.5 rounded-lg bg-neutral-950 transition-colors ${
+                activeExpIndex === 0 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-emerald-400 cursor-pointer'
+              }`}
+              disabled={activeExpIndex === 0}
+            >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="text-xs text-neutral-500 font-mono px-1">1 / 1</span>
-            <button className="p-1.5 rounded-lg bg-neutral-950 text-neutral-700 cursor-not-allowed" disabled>
+            <span className="text-xs text-neutral-400 font-mono px-1">{activeExpIndex + 1} / 2</span>
+            <button
+              onClick={() => setActiveExpIndex(1)}
+              className={`p-1.5 rounded-lg bg-neutral-950 transition-colors ${
+                activeExpIndex === 1 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-emerald-400 cursor-pointer'
+              }`}
+              disabled={activeExpIndex === 1}
+            >
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
@@ -117,60 +154,81 @@ const deployToProduction = async (codebase) => {
             
             {/* TAB 1: PREVIEW INTERATIVO */}
             {activeTab === 'preview' && (
-              <motion.div
-                key="preview"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="flex flex-col md:flex-row gap-6 w-full items-center md:items-stretch"
-              >
-                <div className="flex-1 flex flex-col gap-3 justify-center w-full">
-                  <div>
-                    <label className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block mb-1">
-                      Tamanho do Contexto do Repositório
-                    </label>
-                    <span className="text-sm font-medium text-neutral-200 font-mono">
-                      {Math.round(promptComplexity * 4.2)} linhas de código analisadas
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="15"
-                    max="100"
-                    value={promptComplexity}
-                    onChange={(e) => setPromptComplexity(Number(e.target.value))}
-                    className="w-full accent-emerald-500 bg-neutral-800 h-1.5 rounded-lg cursor-pointer"
-                  />
-                  <p className="text-xs text-neutral-500 italic">
-                    Arraste o controle para simular o volume de dados lido pelo Antigravity e ver a economia de tokens na prática.
+              activeExpIndex === 1 ? (
+                <motion.div
+                  key="preview-vinyl-ai"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="flex flex-col items-center justify-center text-center p-6 w-full flex-1 gap-5"
+                >
+                  <p className="text-neutral-400 text-sm max-w-md leading-relaxed">
+                    Experimente a interface completa do catálogo retrofuturista com o sommelier inteligente de vinis.
                   </p>
-                </div>
+                  <Link
+                    href="/lab/catalogo-vinyl"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-neutral-950 font-bold text-sm shadow-lg shadow-emerald-500/10 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                  >
+                    Acessar Hub do Acervo
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="preview"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="flex flex-col md:flex-row gap-6 w-full items-center md:items-stretch"
+                >
+                  <div className="flex-1 flex flex-col gap-3 justify-center w-full">
+                    <div>
+                      <label className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block mb-1">
+                        Tamanho do Contexto do Repositório
+                      </label>
+                      <span className="text-sm font-medium text-neutral-200 font-mono">
+                        {Math.round(promptComplexity * 4.2)} linhas de código analisadas
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min="15"
+                      max="100"
+                      value={promptComplexity}
+                      onChange={(e) => setPromptComplexity(Number(e.target.value))}
+                      className="w-full accent-emerald-500 bg-neutral-800 h-1.5 rounded-lg cursor-pointer"
+                    />
+                    <p className="text-xs text-neutral-500 italic">
+                      Arraste o controle para simular o volume de dados lido pelo Antigravity e ver a economia de tokens na prática.
+                    </p>
+                  </div>
 
-                {/* Métricas do Simulador */}
-                <div className="w-full md:w-80 bg-neutral-950 border border-neutral-900 rounded-xl p-4 flex flex-col gap-3 justify-center">
-                  <div className="border-b border-neutral-900/60 pb-2">
-                    <span className="text-[10px] font-mono text-neutral-500 block uppercase">Prompt sem Otimização</span>
-                    <div className="flex items-center justify-between text-rose-400 font-mono text-xs mt-0.5">
-                      <span className="flex items-center gap-1"><AlertTriangle className="w-3 h-3" /> {genericTokenCost.toLocaleString()} tokens</span>
+                  {/* Métricas do Simulador */}
+                  <div className="w-full md:w-80 bg-neutral-950 border border-neutral-900 rounded-xl p-4 flex flex-col gap-3 justify-center">
+                    <div className="border-b border-neutral-900/60 pb-2">
+                      <span className="text-[10px] font-mono text-neutral-500 block uppercase">Prompt sem Otimização</span>
+                      <div className="flex items-center justify-between text-rose-400 font-mono text-xs mt-0.5">
+                        <span className="flex items-center gap-1"><AlertTriangle className="w-3 h-3" /> {genericTokenCost.toLocaleString()} tokens</span>
+                      </div>
+                    </div>
+
+                    <div className="border-b border-neutral-900/60 pb-2">
+                      <span className="text-[10px] font-mono text-neutral-500 block uppercase">Prompt Cirúrgico (Vibe Coding)</span>
+                      <div className="flex items-center justify-between text-emerald-400 font-mono text-xs mt-0.5">
+                        <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> {optimizedTokenCost.toLocaleString()} tokens</span>
+                        <span className="text-[9px] font-semibold bg-emerald-500/10 text-emerald-400 px-1 py-0.2 rounded">73% Off</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-0.5">
+                      <span className="text-[10px] font-mono text-emerald-500 uppercase block font-semibold">Créditos Salvos</span>
+                      <span className="text-xl font-bold text-neutral-100 font-mono">
+                        {tokenSavings.toLocaleString()} <span className="text-xs text-neutral-500 font-normal">tokens</span>
+                      </span>
                     </div>
                   </div>
-
-                  <div className="border-b border-neutral-900/60 pb-2">
-                    <span className="text-[10px] font-mono text-neutral-500 block uppercase">Prompt Cirúrgico (Vibe Coding)</span>
-                    <div className="flex items-center justify-between text-emerald-400 font-mono text-xs mt-0.5">
-                      <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> {optimizedTokenCost.toLocaleString()} tokens</span>
-                      <span className="text-[9px] font-semibold bg-emerald-500/10 text-emerald-400 px-1 py-0.2 rounded">73% Off</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-0.5">
-                    <span className="text-[10px] font-mono text-emerald-500 uppercase block font-semibold">Créditos Salvos</span>
-                    <span className="text-xl font-bold text-neutral-100 font-mono">
-                      {tokenSavings.toLocaleString()} <span className="text-xs text-neutral-500 font-normal">tokens</span>
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              )
             )}
 
             {/* TAB 2: CÓDIGO DO AGENTE */}

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "1",
+    "artist": "The Beatles",
+    "album": "Abbey Road",
+    "year": 1969,
+    "vibes": [
+      "clássico",
+      "fim de tarde",
+      "sofisticado",
+      "foco"
+    ],
+    "cover_image_url": "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+    "storage_location": "Prateleira 1, Nicho A",
+    "barcode": "0094638246824",
+    "spotify_id": "0ETFjACtuP2ADo6LFhL6HN",
+    "story": "O adeus definitivo de uma era. Gravado em meio ao caos, cada faixa pulsa com a maestria de uma banda no auge criativo, mesmo em sua iminente dissolução. A produção impecável de George Martin esculpiu um som atemporal, um testamento do último encontro em Abbey Road Studios. Ter este selo Apple de 1969 é possuir o ápice de uma jornada, um artefato sonoro insuperável."
+  },
+  {
+    "id": "2",
+    "artist": "Michael Jackson",
+    "album": "Thriller",
+    "year": 1982,
+    "vibes": [
+      "festa",
+      "dançante",
+      "energia alta",
+      "groove"
+    ],
+    "cover_image_url": "https://i.scdn.co/image/ab67616d0000b27332a7d87248d1b75463483df5",
+    "storage_location": "Prateleira 1, Nicho B",
+    "barcode": "07464381121",
+    "spotify_id": "2ANVost0y2y52ema1E9xAZ",
+    "story": "\"Thriller\" é o ponto de virada definitivo da música. Lançado em 1982, este vinil da Epic, polido pela genialidade de Quincy Jones, capturou a transição do pós-disco para o pop universal com uma urgência palpável. Suas faixas ressoam com paranoia e romance, definindo uma era. Para o colecionador, ter este artefato é segurar a própria essência de um fenômeno global."
+  },
+  {
+    "id": "3",
+    "artist": "The Beatles",
+    "album": "Please Please Me",
+    "year": 1963,
+    "vibes": [
+      "animado",
+      "vintage",
+      "manhã",
+      "cru"
+    ],
+    "cover_image_url": "https://i.scdn.co/image/ab67616d0000b273dbeec63ad914c973e75c24df",
+    "storage_location": "Prateleira 1, Nicho A",
+    "barcode": "0094638241522",
+    "spotify_id": "3KzAvEXcqJKBF97HrXwlgf",
+    "story": "O clássico álbum \"Please Please Me\" do artista The Beatles é uma peça preciosa do acervo."
+  },
+  {
+    "id": "4",
+    "artist": "Gilberto Gil",
+    "album": "Realce",
+    "year": 1979,
+    "vibes": [
+      "solar",
+      "verão",
+      "brasilidades",
+      "cozinhar"
+    ],
+    "cover_image_url": "https://i.scdn.co/image/ab67616d0000b2739f03ac150a11d3d0be4d1c5b",
+    "storage_location": "Prateleira 2, Nicho A",
+    "barcode": "7891430005423",
+    "spotify_id": "1Ve2jiGMVJz5tDxZDYnBLL",
+    "story": "\"Realce\" de Gilberto Gil: um marco da música pop global. Lançado em 1979, pós-exílio, cada sulco pulsa a urgência de uma nação em redefinição cultural. A fusão ousada de ritmos brasileiros, africanos e pop cria uma sonoridade vibrante e atemporal. Possuir este vinil é guardar um pedaço tangível da alma e inovação brasileira."
+  },
+  {
+    "id": "5",
+    "artist": "Led Zeppelin",
+    "album": "Led Zeppelin III",
+    "year": 1970,
+    "vibes": [
+      "descoberta",
+      "novo"
+    ],
+    "cover_image_url": "https://i.scdn.co/image/ab67616d0000b27390a50cfe99a4c19ff3cbfbdb",
+    "storage_location": "Prateleira 3, Nicho B",
+    "spotify_id": "6P5QHz4XtxOmS5EuiGIPut",
+    "story": "Depois do furor de \"Led Zeppelin II\", este vinil de 1970 é a audácia pura. Cada sulco do \"III\" revela a jornada de uma banda que, no auge, ousou explorar o folk e o blues, longe da distorção. A engenharia de Eddie Kramer e a produção de Page capturam uma intimidade e profundidade inéditas. Para um colecionador, ter este artefato é possuir o espírito indomável de uma lenda."
+  },
+  {
+    "id": "6",
+    "artist": "Eric Clapton",
+    "album": "Behind the Sun",
+    "year": 1985,
+    "vibes": [
+      "descoberta",
+      "novo"
+    ],
+    "cover_image_url": "https://i.scdn.co/image/ab67616d0000b2734e9522fabc16bfaf9b44bfa7",
+    "storage_location": "Prateleira 3, Nicho B",
+    "spotify_id": "5WX2WQT74bVZl9UqqY6LZT",
+    "story": "O clássico álbum \"Behind the Sun\" do artista Eric Clapton é uma peça preciosa do acervo."
+  },
+  {
+    "id": "7",
+    "artist": "The Beatles",
+    "album": "Revolver",
+    "year": 1966,
+    "vibes": [
+      "descoberta",
+      "novo"
+    ],
+    "cover_image_url": "https://i.scdn.co/image/ab67616d0000b27328b8b9b46428896e6491e97a",
+    "storage_location": "Prateleira 4, Nicho B",
+    "spotify_id": "3PRoXYsngSwjEQWR5PsHWR",
+    "story": "O clássico álbum \"Revolver\" do artista The Beatles é uma peça preciosa do acervo."
+  }
+]
