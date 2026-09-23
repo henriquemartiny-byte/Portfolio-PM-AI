@@ -20,6 +20,44 @@ import {
 } from 'lucide-react';
 import BentoCard from '../BentoCard';
 
+const VINYL_PREVIEWS = [
+  {
+    id: "1",
+    artist: "The Beatles",
+    album: "Abbey Road",
+    year: 1969,
+    cover: "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+  },
+  {
+    id: "2",
+    artist: "Michael Jackson",
+    album: "Thriller",
+    year: 1982,
+    cover: "https://i.scdn.co/image/ab67616d0000b27332a7d87248d1b75463483df5",
+  },
+  {
+    id: "3",
+    artist: "Gilberto Gil",
+    album: "Realce",
+    year: 1979,
+    cover: "https://i.scdn.co/image/ab67616d0000b2739f03ac150a11d3d0be4d1c5b",
+  },
+  {
+    id: "4",
+    artist: "The Beatles",
+    album: "Please Please Me",
+    year: 1963,
+    cover: "https://i.scdn.co/image/ab67616d0000b273dbeec63ad914c973e75c24df",
+  },
+  {
+    id: "5",
+    artist: "The Beatles",
+    album: "Yellow Submarine",
+    year: 1999,
+    cover: "https://i.scdn.co/image/ab67616d0000b273d807dd713cdfbeed142881e2",
+  }
+];
+
 export default function LabCard({ delay = 0 }: { delay?: number }) {
   const [activeTab, setActiveTab] = useState<'preview' | 'code' | 'console'>('preview');
   const [activeExpIndex, setActiveExpIndex] = useState(0);
@@ -128,11 +166,11 @@ const deployToProduction = async (codebase: any) => {
         {/* CABEÇALHO DO LAB COM NAVEGAÇÃO EM CARROSSEL */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-900 pb-4 w-full">
           <div className="min-w-0 flex-1">
-            <span className="text-xs font-semibold text-emerald-500 tracking-wider uppercase bg-emerald-500/10 px-2.5 py-1 rounded-full inline-block">
+            <span className="text-xs font-semibold text-indigo-400 tracking-wider uppercase bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 rounded-full inline-block">
               Lab de Ideias
             </span>
             <h2 className="text-xl md:text-2xl font-bold text-neutral-100 mt-2 flex items-center gap-2 break-words">
-              <Sparkles className="w-5 h-5 text-emerald-400 shrink-0" />
+              <Sparkles className="w-5 h-5 text-indigo-400 shrink-0" />
               <span>{caseData.title}</span>
             </h2>
           </div>
@@ -142,7 +180,7 @@ const deployToProduction = async (codebase: any) => {
             <button
               onClick={() => setActiveExpIndex(prev => Math.max(0, prev - 1))}
               className={`p-1.5 rounded-lg bg-neutral-950 transition-colors ${
-                activeExpIndex === 0 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-emerald-400 cursor-pointer'
+                activeExpIndex === 0 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-indigo-400 cursor-pointer'
               }`}
               disabled={activeExpIndex === 0}
               aria-label="Experimento anterior"
@@ -155,7 +193,7 @@ const deployToProduction = async (codebase: any) => {
             <button
               onClick={() => setActiveExpIndex(prev => Math.min(experiments.length - 1, prev + 1))}
               className={`p-1.5 rounded-lg bg-neutral-950 transition-colors ${
-                activeExpIndex === experiments.length - 1 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-emerald-400 cursor-pointer'
+                activeExpIndex === experiments.length - 1 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-indigo-400 cursor-pointer'
               }`}
               disabled={activeExpIndex === experiments.length - 1}
               aria-label="Próximo experimento"
@@ -170,244 +208,285 @@ const deployToProduction = async (codebase: any) => {
           {caseData.description}
         </p>
 
-        {/* SELETOR DE ABAS */}
-        <div className="flex items-center gap-4 border-b border-neutral-900 w-full overflow-x-auto">
-          <button
-            onClick={() => setActiveTab('preview')}
-            className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer shrink-0 ${
-              activeTab === 'preview' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300'
-            }`}
-          >
-            <Sliders className="w-4 h-4" />
-            Preview Interativo
-          </button>
-          <button
-            onClick={() => setActiveTab('code')}
-            className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer shrink-0 ${
-              activeTab === 'code' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300'
-            }`}
-          >
-            <Code2 className="w-4 h-4" />
-            Código do Agente
-          </button>
-          <button
-            onClick={() => setActiveTab('console')}
-            className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer shrink-0 ${
-              activeTab === 'console' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300'
-            }`}
-          >
-            <Terminal className="w-4 h-4" />
-            Console de Execução
-          </button>
-        </div>
-
-        {/* ÁREA DE CONTEÚDO DAS ABAS */}
+        {/* ÁREA PRINCIPAL DO EXPERIMENTO */}
         <div className="bg-neutral-950/40 border border-neutral-900 rounded-2xl p-5 min-h-[260px] flex flex-col justify-between flex-1">
           <AnimatePresence mode="wait">
             
-            {/* TAB 1: PREVIEW INTERATIVO */}
-            {activeTab === 'preview' && (
-              activeExpIndex === 0 ? (
-                /* CASO 0: VINYL AI COLLECTION HUB */
-                <motion.div
-                  key="preview-vinyl-ai"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="flex flex-col items-center justify-center text-center p-6 w-full flex-1 gap-5"
-                >
-                  <div className="flex items-center gap-3 bg-neutral-900/60 px-4 py-2 rounded-full border border-neutral-800">
-                    <Disc className="w-4 h-4 text-emerald-400 animate-spin" style={{ animationDuration: '6s' }} />
-                    <span className="text-xs font-mono text-neutral-300">5 Discos Físicos • Spotify API • Gemini Sommelier</span>
-                  </div>
-                  <p className="text-neutral-400 text-sm max-w-md leading-relaxed">
-                    Experimente a interface completa do catálogo retrofuturista com o sommelier inteligente de vinis e storytelling cultural.
-                  </p>
-                  <Link
-                    href="/lab/catalogo-vinyl"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-neutral-950 font-bold text-sm shadow-lg shadow-emerald-500/10 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-                  >
-                    Acessar Hub do Acervo
-                    <ArrowUpRight className="w-4 h-4" />
-                  </Link>
-                </motion.div>
-              ) : activeExpIndex === 1 ? (
-                /* CASO 1: MARVIN AGENTE DE ORGANIZAÇÃO PESSOAL */
-                <motion.div
-                  key="preview-marvin"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="flex flex-col gap-4 w-full flex-1 justify-center"
-                >
-                  {/* Badge Persona Douglas Adams */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-neutral-900/50 border border-neutral-800/80 rounded-xl px-3.5 py-2.5">
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <Bot className="w-4 h-4 text-emerald-400 shrink-0" />
-                      <span className="text-xs text-neutral-300 font-mono truncate">
-                        &ldquo;Cérebro do tamanho de um planeta e me colocam para ordenar tarefas...&rdquo;
-                      </span>
+            {/* CASO 0: VINYL AI COLLECTION HUB (Sem abas, acervo visual com paleta azul do portfólio) */}
+            {activeExpIndex === 0 && (
+              <motion.div
+                key="case-vinyl"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                className="flex flex-col gap-4 w-full flex-1 justify-between"
+              >
+                {/* Faixa com as capas reais da coleção */}
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 w-full">
+                  {VINYL_PREVIEWS.map((vinyl) => (
+                    <div
+                      key={vinyl.id}
+                      className="group relative bg-neutral-900/60 border border-neutral-800/70 hover:border-indigo-500/40 rounded-xl p-2.5 flex flex-col gap-2 transition-all hover:-translate-y-1 duration-300"
+                    >
+                      <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-neutral-950 shadow-md">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={vinyl.cover}
+                          alt={`${vinyl.album} - ${vinyl.artist}`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-1.5">
+                          <span className="text-[10px] font-mono text-indigo-300 font-semibold">{vinyl.year}</span>
+                        </div>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold text-neutral-200 truncate group-hover:text-indigo-300 transition-colors">
+                          {vinyl.album}
+                        </p>
+                        <p className="text-[10px] text-neutral-400 truncate">
+                          {vinyl.artist}
+                        </p>
+                      </div>
                     </div>
-                    <span className="text-[10px] font-mono text-emerald-400/90 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 shrink-0 self-start sm:self-auto">
-                      Douglas Adams • O Guia do Mochileiro
+                  ))}
+                </div>
+
+                {/* Barra de Ação & CTA em Tom Azul/Índigo */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-neutral-900/40 border border-neutral-800/80 rounded-xl p-3.5 mt-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-mono text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 rounded-lg">
+                      <Disc className="w-3.5 h-3.5 text-indigo-400 animate-spin" style={{ animationDuration: '6s' }} />
+                      5 Discos Físicos
+                    </span>
+                    <span className="text-xs font-mono text-neutral-400 bg-neutral-800/50 px-2.5 py-1 rounded-lg border border-neutral-800">
+                      Spotify Web API
+                    </span>
+                    <span className="text-xs font-mono text-blue-300 bg-blue-500/10 px-2.5 py-1 rounded-lg border border-blue-500/20">
+                      Gemini 2.5 Flash Sommelier
                     </span>
                   </div>
 
-                  {/* Grid dos 4 Pilares Técnicos */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3 flex flex-col gap-1.5 hover:border-emerald-500/30 transition-colors">
-                      <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-semibold">
-                        <Cpu className="w-3.5 h-3.5" />
-                        <span>Context Engineering</span>
-                      </div>
-                      <p className="text-[11px] text-neutral-400 leading-relaxed">
-                        Ancoragem determinística em Markdown canônico (<span className="text-neutral-200 font-mono">BACKLOG.md</span>), eliminando alucinações sem overhead de vetores.
-                      </p>
-                    </div>
+                  <Link
+                    href="/lab/catalogo-vinyl"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-500 hover:from-blue-500 hover:to-indigo-400 text-white font-semibold text-xs shadow-lg shadow-indigo-600/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                  >
+                    <span>Explorar Hub do Acervo</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </motion.div>
+            )}
 
-                    <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3 flex flex-col gap-1.5 hover:border-teal-500/30 transition-colors">
-                      <div className="flex items-center gap-2 text-teal-400 font-mono text-xs font-semibold">
-                        <FileText className="w-3.5 h-3.5" />
-                        <span>Parser Algorítmico (PDF)</span>
-                      </div>
-                      <p className="text-[11px] text-neutral-400 leading-relaxed">
-                        Extração atômica de faturas com <span className="text-neutral-200 font-mono">pdf-parse</span>, classificação de gastos e conciliação bancária sem digitação manual.
-                      </p>
-                    </div>
-
-                    <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3 flex flex-col gap-1.5 hover:border-cyan-500/30 transition-colors">
-                      <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold">
-                        <RefreshCw className="w-3.5 h-3.5" />
-                        <span>OAuth2 & Google APIs</span>
-                      </div>
-                      <p className="text-[11px] text-neutral-400 leading-relaxed">
-                        Sincronização bidirecional em tempo real com Google Tasks API e espelhamento determinístico no Google Drive.
-                      </p>
-                    </div>
-
-                    <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3 flex flex-col gap-1.5 hover:border-indigo-500/30 transition-colors">
-                      <div className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-semibold">
-                        <GitBranch className="w-3.5 h-3.5" />
-                        <span>Git CLI & Automação OS</span>
-                      </div>
-                      <p className="text-[11px] text-neutral-400 leading-relaxed">
-                        Agente conectado ao shell local: geração de commits semânticos, resolução de tarefas, lint e verificação de deploys.
-                      </p>
-                    </div>
+            {/* CASO 1: MARVIN AGENTE DE ORGANIZAÇÃO PESSOAL (Sem abas, 4 cards técnicos + badge Douglas Adams) */}
+            {activeExpIndex === 1 && (
+              <motion.div
+                key="case-marvin"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                className="flex flex-col gap-4 w-full flex-1 justify-between"
+              >
+                {/* Badge Persona Douglas Adams */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-neutral-900/50 border border-neutral-800/80 rounded-xl px-3.5 py-2.5">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <Bot className="w-4 h-4 text-indigo-400 shrink-0" />
+                    <span className="text-xs text-neutral-300 font-mono truncate">
+                      &ldquo;Cérebro do tamanho de um planeta e me colocam para ordenar tarefas...&rdquo;
+                    </span>
                   </div>
-                </motion.div>
-              ) : (
-                /* CASO 2: VIBE CODING TOKEN SIMULATOR */
-                <motion.div
-                  key="preview-vibe"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="flex flex-col md:flex-row gap-6 w-full items-center md:items-stretch"
-                >
-                  <div className="flex-1 flex flex-col gap-3 justify-center w-full">
-                    <div>
-                      <label className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block mb-1">
-                        Tamanho do Contexto do Repositório
-                      </label>
-                      <span className="text-sm font-medium text-neutral-200 font-mono">
-                        {Math.round(promptComplexity * 4.2)} linhas de código analisadas
-                      </span>
+                  <span className="text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 shrink-0 self-start sm:self-auto">
+                    Douglas Adams • O Guia do Mochileiro
+                  </span>
+                </div>
+
+                {/* Grid dos 4 Pilares Técnicos da Arquitetura */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3.5 flex flex-col gap-1.5 hover:border-indigo-500/40 transition-colors">
+                    <div className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-semibold">
+                      <Cpu className="w-3.5 h-3.5" />
+                      <span>Context Engineering</span>
                     </div>
-                    <input
-                      type="range"
-                      min="15"
-                      max="100"
-                      value={promptComplexity}
-                      onChange={(e) => setPromptComplexity(Number(e.target.value))}
-                      className="w-full accent-emerald-500 bg-neutral-800 h-1.5 rounded-lg cursor-pointer"
-                    />
-                    <p className="text-xs text-neutral-500 italic">
-                      Arraste o controle para simular o volume de dados lido pelo Antigravity e ver a economia de tokens na prática.
+                    <p className="text-xs text-neutral-400 leading-relaxed">
+                      Ancoragem determinística em Markdown canônico (<span className="text-neutral-200 font-mono">BACKLOG.md</span>), eliminando alucinações sem overhead de vetores.
                     </p>
                   </div>
 
-                  {/* Métricas do Simulador */}
-                  <div className="w-full md:w-80 bg-neutral-950 border border-neutral-900 rounded-xl p-4 flex flex-col gap-3 justify-center">
-                    <div className="border-b border-neutral-900/60 pb-2">
-                      <span className="text-[10px] font-mono text-neutral-500 block uppercase">Prompt sem Otimização</span>
-                      <div className="flex items-center justify-between text-rose-400 font-mono text-xs mt-0.5">
-                        <span className="flex items-center gap-1"><AlertTriangle className="w-3 h-3" /> {genericTokenCost.toLocaleString()} tokens</span>
-                      </div>
+                  <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3.5 flex flex-col gap-1.5 hover:border-blue-500/40 transition-colors">
+                    <div className="flex items-center gap-2 text-blue-400 font-mono text-xs font-semibold">
+                      <FileText className="w-3.5 h-3.5" />
+                      <span>Parser Algorítmico (PDF)</span>
                     </div>
-
-                    <div className="border-b border-neutral-900/60 pb-2">
-                      <span className="text-[10px] font-mono text-neutral-500 block uppercase">Prompt Cirúrgico (Vibe Coding)</span>
-                      <div className="flex items-center justify-between text-emerald-400 font-mono text-xs mt-0.5">
-                        <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> {optimizedTokenCost.toLocaleString()} tokens</span>
-                        <span className="text-[9px] font-semibold bg-emerald-500/10 text-emerald-400 px-1 py-0.2 rounded">73% Off</span>
-                      </div>
-                    </div>
-
-                    <div className="pt-0.5">
-                      <span className="text-[10px] font-mono text-emerald-500 uppercase block font-semibold">Créditos Salvos</span>
-                      <span className="text-xl font-bold text-neutral-100 font-mono">
-                        {tokenSavings.toLocaleString()} <span className="text-xs text-neutral-500 font-normal">tokens</span>
-                      </span>
-                    </div>
+                    <p className="text-xs text-neutral-400 leading-relaxed">
+                      Extração atômica de faturas com <span className="text-neutral-200 font-mono">pdf-parse</span>, classificação de gastos e conciliação bancária sem digitação manual.
+                    </p>
                   </div>
-                </motion.div>
-              )
-            )}
 
-            {/* TAB 2: CÓDIGO DO AGENTE */}
-            {activeTab === 'code' && (
-              <motion.div
-                key="code"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="w-full font-mono text-xs md:text-sm text-emerald-400/90 leading-relaxed overflow-x-auto bg-black/20 p-4 rounded-xl border border-neutral-900/60"
-              >
-                <pre className="whitespace-pre">{caseData.code}</pre>
+                  <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3.5 flex flex-col gap-1.5 hover:border-sky-500/40 transition-colors">
+                    <div className="flex items-center gap-2 text-sky-400 font-mono text-xs font-semibold">
+                      <RefreshCw className="w-3.5 h-3.5" />
+                      <span>OAuth2 & Google APIs</span>
+                    </div>
+                    <p className="text-xs text-neutral-400 leading-relaxed">
+                      Sincronização bidirecional em tempo real com Google Tasks API e espelhamento determinístico no Google Drive.
+                    </p>
+                  </div>
+
+                  <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3.5 flex flex-col gap-1.5 hover:border-violet-500/40 transition-colors">
+                    <div className="flex items-center gap-2 text-violet-400 font-mono text-xs font-semibold">
+                      <GitBranch className="w-3.5 h-3.5" />
+                      <span>Git CLI & Automação OS</span>
+                    </div>
+                    <p className="text-xs text-neutral-400 leading-relaxed">
+                      Agente conectado ao shell local: geração de commits semânticos, resolução de tarefas, lint e verificação de deploys.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Rodapé técnico do Marvin */}
+                <div className="flex items-center justify-between text-[11px] font-mono text-neutral-500 border-t border-neutral-900 pt-3">
+                  <span>Runtime: Local OS + Shell CLI</span>
+                  <span className="text-indigo-400/80">Operação Local First • 100% Determinística</span>
+                </div>
               </motion.div>
             )}
 
-            {/* TAB 3: CONSOLE DE EXECUÇÃO */}
-            {activeTab === 'console' && (
+            {/* CASO 2: VIBE CODING PORTFOLIO (Mantém as 3 abas e o simulador interativo) */}
+            {activeExpIndex === 2 && (
               <motion.div
-                key="console"
-                initial={{ opacity: 0, y: 10 }}
+                key="case-vibe"
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="w-full font-mono text-xs text-neutral-300 flex flex-col gap-2 p-4 bg-black/30 rounded-xl border border-neutral-900/60 min-h-[140px]"
+                exit={{ opacity: 0, y: -8 }}
+                className="flex flex-col gap-4 w-full flex-1 justify-between"
               >
-                {consoleLogs.length === 0 && (
-                  <span className="text-neutral-600 italic">Console pronto. Toque em 'Executar Simulação de Log' para disparar o pipeline.</span>
-                )}
-                {consoleLogs.map((log, i) => (
-                  <div key={i} className="flex items-start gap-2 text-neutral-400">
-                    <span className="text-emerald-500 font-bold select-none">&gt;</span>
-                    <span>{log}</span>
-                  </div>
-                ))}
-                {isSimulating && (
-                  <div className="w-1.5 h-3.5 bg-emerald-400 animate-pulse mt-0.5" />
-                )}
+                {/* SELETOR DE ABAS (APENAS PARA O CASO 3) */}
+                <div className="flex items-center gap-4 border-b border-neutral-900 w-full overflow-x-auto">
+                  <button
+                    onClick={() => setActiveTab('preview')}
+                    className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer shrink-0 ${
+                      activeTab === 'preview' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-neutral-500 hover:text-neutral-300'
+                    }`}
+                  >
+                    <Sliders className="w-4 h-4" />
+                    Preview Interativo
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('code')}
+                    className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer shrink-0 ${
+                      activeTab === 'code' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-neutral-500 hover:text-neutral-300'
+                    }`}
+                  >
+                    <Code2 className="w-4 h-4" />
+                    Código do Agente
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('console')}
+                    className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer shrink-0 ${
+                      activeTab === 'console' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-neutral-500 hover:text-neutral-300'
+                    }`}
+                  >
+                    <Terminal className="w-4 h-4" />
+                    Console de Execução
+                  </button>
+                </div>
+
+                {/* CONTEÚDO DAS ABAS DO CASO 3 */}
+                <div className="flex-1 flex flex-col justify-center">
+                  {activeTab === 'preview' && (
+                    <div className="flex flex-col md:flex-row gap-6 w-full items-center md:items-stretch py-2">
+                      <div className="flex-1 flex flex-col gap-3 justify-center w-full">
+                        <div>
+                          <label className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block mb-1">
+                            Tamanho do Contexto do Repositório
+                          </label>
+                          <span className="text-sm font-medium text-neutral-200 font-mono">
+                            {Math.round(promptComplexity * 4.2)} linhas de código analisadas
+                          </span>
+                        </div>
+                        <input
+                          type="range"
+                          min="15"
+                          max="100"
+                          value={promptComplexity}
+                          onChange={(e) => setPromptComplexity(Number(e.target.value))}
+                          className="w-full accent-indigo-500 bg-neutral-800 h-1.5 rounded-lg cursor-pointer"
+                        />
+                        <p className="text-xs text-neutral-500 italic">
+                          Arraste o controle para simular o volume de dados lido pelo Antigravity e ver a economia de tokens na prática.
+                        </p>
+                      </div>
+
+                      {/* Métricas do Simulador */}
+                      <div className="w-full md:w-80 bg-neutral-950 border border-neutral-900 rounded-xl p-4 flex flex-col gap-3 justify-center">
+                        <div className="border-b border-neutral-900/60 pb-2">
+                          <span className="text-[10px] font-mono text-neutral-500 block uppercase">Prompt sem Otimização</span>
+                          <div className="flex items-center justify-between text-rose-400 font-mono text-xs mt-0.5">
+                            <span className="flex items-center gap-1"><AlertTriangle className="w-3 h-3" /> {genericTokenCost.toLocaleString()} tokens</span>
+                          </div>
+                        </div>
+
+                        <div className="border-b border-neutral-900/60 pb-2">
+                          <span className="text-[10px] font-mono text-neutral-500 block uppercase">Prompt Cirúrgico (Vibe Coding)</span>
+                          <div className="flex items-center justify-between text-indigo-400 font-mono text-xs mt-0.5">
+                            <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> {optimizedTokenCost.toLocaleString()} tokens</span>
+                            <span className="text-[9px] font-semibold bg-indigo-500/10 text-indigo-400 px-1 py-0.2 rounded">73% Off</span>
+                          </div>
+                        </div>
+
+                        <div className="pt-0.5">
+                          <span className="text-[10px] font-mono text-indigo-400 uppercase block font-semibold">Créditos Salvos</span>
+                          <span className="text-xl font-bold text-neutral-100 font-mono">
+                            {tokenSavings.toLocaleString()} <span className="text-xs text-neutral-500 font-normal">tokens</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'code' && (
+                    <div className="w-full font-mono text-xs md:text-sm text-indigo-300 leading-relaxed overflow-x-auto bg-black/20 p-4 rounded-xl border border-neutral-900/60 my-2">
+                      <pre className="whitespace-pre">{caseData.code}</pre>
+                    </div>
+                  )}
+
+                  {activeTab === 'console' && (
+                    <div className="w-full font-mono text-xs text-neutral-300 flex flex-col gap-2 p-4 bg-black/30 rounded-xl border border-neutral-900/60 min-h-[140px] my-2">
+                      {consoleLogs.length === 0 && (
+                        <span className="text-neutral-600 italic">Console pronto. Toque em 'Executar Simulação de Log' para disparar o pipeline.</span>
+                      )}
+                      {consoleLogs.map((log, i) => (
+                        <div key={i} className="flex items-start gap-2 text-neutral-400">
+                          <span className="text-indigo-400 font-bold select-none">&gt;</span>
+                          <span>{log}</span>
+                        </div>
+                      ))}
+                      {isSimulating && (
+                        <div className="w-1.5 h-3.5 bg-indigo-400 animate-pulse mt-0.5" />
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* BOTÃO DE SIMULAÇÃO (APENAS NO CASO 3) */}
+                <div className="flex items-center gap-3 border-t border-neutral-900/40 pt-4">
+                  <button
+                    onClick={handleRunSimulation}
+                    disabled={isSimulating}
+                    className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-medium text-xs transition-all cursor-pointer ${
+                      isSimulating 
+                        ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed' 
+                        : 'bg-indigo-600 hover:bg-indigo-500 text-white font-bold shadow-md shadow-indigo-600/20'
+                    }`}
+                  >
+                    <Terminal className="w-3.5 h-3.5" />
+                    {isSimulating ? "Executando Pipeline..." : "Executar Simulação de Log"}
+                  </button>
+                </div>
               </motion.div>
             )}
+
           </AnimatePresence>
-
-          {/* BOTÃO DE SIMULAÇÃO */}
-          <div className="flex items-center gap-3 mt-4 border-t border-neutral-900/40 pt-4">
-            <button
-              onClick={handleRunSimulation}
-              disabled={isSimulating}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-medium text-xs transition-all cursor-pointer ${
-                isSimulating 
-                  ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed' 
-                  : 'bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold shadow-md shadow-emerald-500/5'
-              }`}
-            >
-              <Terminal className="w-3.5 h-3.5" />
-              {isSimulating ? "Executando Pipeline..." : "Executar Simulação de Log"}
-            </button>
-          </div>
         </div>
 
       </div>
