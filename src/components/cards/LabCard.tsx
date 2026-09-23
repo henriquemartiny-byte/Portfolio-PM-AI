@@ -109,7 +109,7 @@ export async function runMarvinCycle(context: LocalWorkspace) {
   return { status: 'Operação concluída com sucesso. Embora ninguém vá me agradecer.' };
 }`,
       logs: [
-        "Marvin OS inicializado. 'Cérebro do tamanho de um planeta e me colocam para ordenar tarefas...'",
+        "Marvin OS inicializado. 'Tenho um cérebro do tamanho de um planeta e me colocam para organizar tarefas...'",
         "Lendo contexto estruturado em 00-Raiz/BACKLOG.md (zero alucinações)...",
         "Executando pdf-parse em faturas de cartão de crédito e conciliando lançamentos...",
         "Autenticando via OAuth2 e sincronizando lista com Google Tasks API...",
@@ -278,7 +278,7 @@ const deployToProduction = async (codebase: any) => {
               </motion.div>
             )}
 
-            {/* CASO 1: MARVIN AGENTE DE ORGANIZAÇÃO PESSOAL (Sem abas, 4 cards técnicos + badge Douglas Adams) */}
+            {/* CASO 1: MARVIN AGENTE DE ORGANIZAÇÃO PESSOAL (Sem abas, destaque espaçoso Douglas Adams + 4 cards) */}
             {activeExpIndex === 1 && (
               <motion.div
                 key="case-marvin"
@@ -287,15 +287,17 @@ const deployToProduction = async (codebase: any) => {
                 exit={{ opacity: 0, y: -8 }}
                 className="flex flex-col gap-4 w-full flex-1 justify-between"
               >
-                {/* Badge Persona Douglas Adams */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-neutral-900/50 border border-neutral-800/80 rounded-xl px-3.5 py-2.5">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <Bot className="w-4 h-4 text-indigo-400 shrink-0" />
-                    <span className="text-xs text-neutral-300 font-mono truncate">
-                      &ldquo;Cérebro do tamanho de um planeta e me colocam para ordenar tarefas...&rdquo;
-                    </span>
+                {/* Destaque Espaçoso Persona Douglas Adams (Sem truncate, caixa ampla e confortável) */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 bg-gradient-to-r from-indigo-950/40 via-neutral-900/60 to-neutral-900/40 border border-indigo-500/30 rounded-xl p-4 shadow-sm">
+                  <div className="flex items-start md:items-center gap-3.5 min-w-0">
+                    <div className="p-2 rounded-lg bg-indigo-500/10 border border-indigo-500/20 shrink-0 mt-0.5 md:mt-0">
+                      <Bot className="w-5 h-5 text-indigo-400" />
+                    </div>
+                    <p className="text-xs sm:text-sm text-neutral-200 font-mono italic leading-relaxed">
+                      &ldquo;Tenho um cérebro do tamanho de um planeta e me colocam para organizar tarefas...&rdquo;
+                    </p>
                   </div>
-                  <span className="text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 shrink-0 self-start sm:self-auto">
+                  <span className="text-[10px] font-mono text-indigo-300 bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20 shrink-0 self-start md:self-center whitespace-nowrap">
                     Douglas Adams • O Guia do Mochileiro
                   </span>
                 </div>
