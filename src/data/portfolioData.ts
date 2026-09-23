@@ -71,84 +71,91 @@ export const portfolioData: PortfolioData = {
   // 1. Perfil / Hero
   profile: {
     name: "Henrique Martiny",
-    title: "AI Product Manager & Designer",
-    location: "Porto Alegre, Brasil",
-    bio: "Construindo uma nova geração de produtos digitais na intersecção entre Pessoas, Product Management, UX de alta fidelidade e Inteligência Artificial Gerativa.",
+    title: "Senior Technical Product Manager & STS Researcher",
+    location: "Porto Alegre, Brasil • Cidadão Italiano (UE)",
+    bio: "Senior TPM na Dell Technologies e pesquisador em Ciência, Tecnologia e Sociedade (STS). Liderando produtos de IA corporativa, esteiras de Spec-Driven Development e pesquisa sociotécnica sobre plataformização do trabalho.",
     email: "henrique.martiny@gmail.com",
     avatarUrl: "/avatar.png",
     socials: {
-      github: "https://github.com/henriquemartiny",
-      linkedin: "https://linkedin.com/in/henriquemartiny",
-      twitter: "https://twitter.com/hmartiny",
+      github: "https://github.com/henriquemartiny-byte",
+      linkedin: "https://www.linkedin.com/in/henrique-martiny-121954191",
     },
   },
 
   // 2. Status Atual
   status: {
     label: "STATUS ATUAL",
-    title: "Liderando o Projeto Merlin AI",
-    description: "Escalando produtos inteligentes de IA na Dell Technologies e desenvolvendo soluções de Tech Ambiental.",
+    title: "Senior TPM — Agentic & Enterprise AI",
+    description: "Orquestrando o squad com Devin e MCP via Spec-Driven Development na Dell Technologies e finalizando pesquisa em ecologias sociotécnicas.",
     isActive: true,
-    tags: ["Product Owner", "GenAI", "Agile", "UX Design"],
+    tags: ["Spec-Driven", "Devin & MCP", "Enterprise AI", "STS Research"],
   },
 
-  // 3. Playbook de Metodologias (How I Think)
+  // 3. Filosofia de Produto ("How I Think")
   thinking: {
     title: "How I Think",
-    subtitle: "Minha filosofia para gerenciar produtos complexos e inovação.",
+    subtitle: "Minha filosofia para gerenciar produtos complexos, IA e inovação.",
     frameworks: [
       {
-        title: "AI-Driven Product Discovery",
-        shortDesc: "Reduzindo ciclos de validação de semanas para dias com IA.",
-        detailedDesc: "Conecto engenharia de prompt avançada a frameworks tradicionais de discovery para sintetizar com velocidade pesquisas de mercado, dados quantitativos e feedbacks. O objetivo é acelerar o entendimento de personas e mapeamento de dores, ganhando eficiência sem perder a sensibilidade humana no processo.",
+        title: "Spec-Driven Development & Agentic Ops",
+        shortDesc: "Acelerando ritos de engenharia de 6x a 30x com documentação viva e agentes.",
+        detailedDesc: "Utilizo o Devin integrado via Model Context Protocol (MCP) ao Jira e Confluence com 13 skills especializadas. Em vez de documentação estática, aplico a abordagem Spec-Driven: contexto vivo e critérios técnicos rigorosos no Jira que aceleram o squad e alimentam agentes de engenharia sem ambiguidades.",
         iconName: "Sparkles",
       },
       {
-        title: "Priorização de Valor Real",
-        shortDesc: "Equilibrando o custo de implementação com o impacto de negócio.",
-        detailedDesc: "Priorizar produtos de IA exige ir além do RICE tradicional. Adapto matrizes de esforço e impacto para a realidade dos modelos de linguagem, ponderando variáveis críticas: custo de computação e APIs, latência, taxa de acerto/confiabilidade do modelo e, fundamentalmente, o valor real entregue na ponta.",
+        title: "Priorização Sociotécnica e Valor Real",
+        shortDesc: "Ponderando latência, custo de modelos e impacto humano na ponta.",
+        detailedDesc: "Priorizar produtos de IA exige ir além do RICE tradicional. Avalio a viabilidade de modelos computacionais equilibrando consumo de tokens, latência de inferência, custo de infraestrutura e o valor tangível entregue ao usuário, garantindo soluções robustas onde a IA realmente agrega valor.",
         iconName: "Compass",
       },
       {
-        title: "Design Ops & Cultura Ágil",
-        shortDesc: "Conectando design e engenharia em sprints paralelas e sem atrito.",
-        detailedDesc: "Acredito em times sinérgicos onde o protótipo de alta fidelidade funciona como a própria especificação viva do produto. Busco estabelecer fluxos de trabalho ágeis que permitem que designers e engenheiros construam juntos e iterem em paralelo, eliminando gargalos de comunicação e acelerando o desenvolvimento.",
+        title: "Design Ops & Framework MakerLoop",
+        shortDesc: "Eliminando o abismo entre design de alta fidelidade e código de produção.",
+        detailedDesc: "Concebi o framework MakerLoop na Dell para integrar designers e engenheiros desde o discovery até o handoff. Protótipos funcionais iteram em paralelo com a arquitetura técnica, eliminando retrabalho e acelerando a entrega de front-end.",
         iconName: "RotateCcw",
       },
       {
-        title: "UX como lente principal",
-        shortDesc: "Projetando interfaces focadas em explicabilidade e confiança para sistemas cognitivos.",
-        detailedDesc: "Interfaces inteligentes não podem ser caixas-pretas. Olhar o produto através da lente de UX significa desenhar interações que constroem confiança, projetando componentes visuais para processamentos em tempo real (streaming) e arquitetando fluxos preparados para mitigar e lidar de forma elegante com as imprevisibilidades e alucinações dos modelos.",
+        title: "UX e Confiabilidade em Sistemas Cognitivos",
+        shortDesc: "Projetando interfaces transparentes para explicabilidade e mitigação de erros.",
+        detailedDesc: "Sistemas inteligentes não podem ser caixas-pretas. Liderar a experiência do usuário em IA significa desenhar streaming em tempo real, explicabilidade das decisões automatizadas e fluxos elegantes de fallback e supervisão humana (human-in-the-loop).",
         iconName: "Cpu",
       },
     ],
   },
 
-  // 4. Trabalhos e Cases Profissionais
+  // 4. Trabalhos & Cases (Matriz 2x2: 2 Enterprise + 2 Acadêmicos)
   works: {
     cases: [
       {
         title: "Merlin AI — Dell Technologies",
-        category: "Product Management & AI Strategy",
-        description: "Liderança do produto Merlin AI como Senior Analyst Project Manager e Product Owner, definindo roadmap, refinando o backlog com metodologias ágeis e arquitetando soluções inteligentes baseadas em IA para escala corporativa.",
-        year: "2025 - 2026",
-        tags: ["Product Ownership", "Dell Tech", "Enterprise AI", "Scrum"],
+        category: "Enterprise AI & Global Operations",
+        description: "Liderança de produto e UX na evolução do Merlin AI de PoC para plataforma corporativa de agentes autônomos de IA para suporte e infraestrutura. Adoção por 10.000+ operadores em 40+ países com 94% CSAT sustentado.",
+        year: "2023 - 2024",
+        tags: ["10k+ Users", "40+ Countries", "94% CSAT", "AI Product Lead", "Dell Tech"],
         gradient: "from-blue-600/20 via-indigo-500/10 to-transparent",
       },
       {
-        title: "MBA Gestão de Projetos e Metodologias Ágeis",
-        category: "Especialização Acadêmica — PUCRS",
-        description: "Aplicação prática de frameworks modernos de gestão, governança ágil, métricas de produto e liderança de times multifuncionais em cenários de alta incerteza tecnológica.",
-        year: "2026",
-        tags: ["Agile Methodologies", "PUCRS", "Product Metrics", "Leadership"],
+        title: "Plataforma Teneo & MakerLoop — Dell Technologies",
+        category: "Product Management & DesignOps",
+        description: "Sustentação e governança de plataforma crítica de precificação e cotação B2B movimentando $1.8 Bilhão em receita anual sem downtime. Criação do framework proprietário MakerLoop DesignOps.",
+        year: "2022 - 2025",
+        tags: ["$1.8B Transacted", "Zero Downtime", "MakerLoop", "Enterprise B2B"],
+        gradient: "from-indigo-600/20 via-purple-500/10 to-transparent",
+      },
+      {
+        title: "MBA Gestão Ágil: Ecologias Sociotécnicas — PUCRS",
+        category: "Pós-Graduação & Monografia",
+        description: "Pesquisa aplicada sobre a evolução sociotécnica do Spotify: da transição dos Squads tradicionais para plataformas internas de desenvolvedores (Backstage, DevEx) e governança ágil de IA autônoma.",
+        year: "2025 - 2026",
+        tags: ["Spotify Case Study", "Platform Engineering", "Sociotechnical Ecologies", "PUCRS"],
         gradient: "from-purple-600/20 via-pink-500/10 to-transparent",
       },
       {
-        title: "Comunicação Digital e Interfaces",
-        category: "Bacharelado — Unisinos",
-        description: "Fundamentação teórica e prática em design de interface, arquitetura de informação e comportamento do usuário em ecossistemas de mídia digital.",
+        title: "Comunicação Digital & Pesquisa STS — Unisinos / Digilabour",
+        category: "Bacharelado & Iniciação Científica",
+        description: "Bolsista de P&D em Design no programa Dell DPDP e pesquisador afiliado ao Digilabour (coord. Rafael Grohmann). TCC laureado com distinção máxima sobre plataformização do serviço público sob orientação de Gustavo Fischer.",
         year: "2019 - 2023",
-        tags: ["UX/UI Design", "Information Architecture", "Digital Strategy"],
+        tags: ["Digilabour", "Bolsa Dell DPDP", "STS / Platform Studies", "Nota Máxima"],
         gradient: "from-emerald-600/20 via-teal-500/10 to-transparent",
       },
     ],

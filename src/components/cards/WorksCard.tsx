@@ -27,7 +27,7 @@ export default function WorksCard({ delay = 0 }: { delay?: number }) {
         </div>
 
         {/* Grade de Cases de Trabalho */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1">
           {works.cases.map((w, index) => (
             <div
               key={w.title}
