@@ -48,6 +48,7 @@ export interface WorksData {
 
 export interface LabExperiment {
   title: string;
+  category?: string;
   description: string;
   codeSnippet: string;
   logs: string[];
@@ -167,27 +168,60 @@ export const portfolioData: PortfolioData = {
     subtitle: "Casos de uso de IA com a mão na massa.",
     experiments: [
       {
-        title: "Re.Floresta",
-        description: "Iniciativa de tecnologia ambiental voltada para o monitoramento inteligente de áreas florestais utilizando análise de dados e crédito de carbono.",
-        codeSnippet: `const monitorForestArea = async (geoZone) => {
-  const metrics = await aiAgent.analyzeSatelliteData(geoZone);
-  if (metrics.canopyLoss > 0.05) {
-    return triggerAlert('Alerta de desmatamento detectado.');
-  }
-  return generateCarbonCredits(metrics);
+        title: "Vinyl AI Collection Hub",
+        category: "Jamstack & Edge AI",
+        description: "Arquitetura Jamstack híbrida com Spotify Web API e Gemini para catalogar e explorar acervos físicos de vinil. Recomendações contextuais de sommelier e contextualização cultural de cada prensagem com custo zero de infraestrutura.",
+        codeSnippet: `// Integração do Sommelier com Spotify API e Google Gemini
+const getVinylDetails = async (album: string, artist: string) => {
+  const meta = await spotify.searchAlbum(album, artist);
+  const wiki = await wikipedia.getSummary(album, artist);
+  const story = await gemini.generateStory(album, artist, wiki);
+  return { ...meta, story };
 };`,
         logs: [
-          "Iniciando módulo Re.Floresta...",
-          "Carregando dados geoespaciais e de satélite...",
-          "Agente de IA processando densidade de copa...",
-          "Análise concluída: Área estável. Créditos de carbono calculados.",
+          "Inicializando módulo de catalogação física...",
+          "Autenticando na API do Spotify com client credentials...",
+          "Conectando com o modelo Gemini 2.5 Flash via Edge Runtime...",
+          "Indexando banco local via collection.json...",
+          "Vinyl AI Sommelier pronto para receber interações."
+        ],
+      },
+      {
+        title: "Marvin: Agente de Organização Pessoal",
+        category: "Autonomous Agent & Chief of Staff",
+        description: "Agente autônomo local e Chief of Staff pessoal calibrado com a personalidade de Marvin, o Androide Paranoico (O Guia do Mochileiro das Galáxias, de Douglas Adams). Orquestra rotinas, conciliação financeira e esteiras de desenvolvimento através de pipelines determinísticos no sistema operacional, APIs do Google e engenharia de contexto rigorosa.",
+        codeSnippet: `// Runtime do Agente Autônomo Marvin (OS + APIs + Contexto)
+export async function runMarvinCycle(context: LocalWorkspace) {
+  // 1. Context Engineering determinístico via Markdown canônico
+  const backlog = await readCanonicalMarkdown('./00-Raiz/BACKLOG.md');
+  
+  // 2. Parser algorítmico de faturas financeiras
+  const pdfStatements = await parseFinancialPDFs('./06-pessoal-patrimonio/Faturas/');
+  const reconciled = reconcileTransactions(pdfStatements, backlog.budget);
+
+  // 3. Sincronização bidirecional OAuth2 com Google Tasks API
+  await googleTasks.syncPendingItems(backlog.tasks, { purgeCompleted: true });
+
+  // 4. Automação Git CLI: commits semânticos e espelhamento em nuvem
+  await git.commitAndPush('chore(sync): automated backlog & cloud mirror');
+  return { status: 'Operação concluída com sucesso. Embora ninguém vá me agradecer.' };
+}`,
+        logs: [
+          "Marvin OS inicializado. 'Cérebro do tamanho de um planeta e me colocam para ordenar tarefas...'",
+          "Lendo contexto estruturado em 00-Raiz/BACKLOG.md (zero alucinações)...",
+          "Executando pdf-parse em faturas de cartão de crédito e conciliando lançamentos...",
+          "Autenticando via OAuth2 e sincronizando lista com Google Tasks API...",
+          "Executando espelhamento determinístico com Google Drive...",
+          "Executando git add e git commit semântico via shell CLI...",
+          "Sprint sincronizada com sucesso. Suspiro existencial concluído."
         ],
       },
       {
         title: "AI-Powered Vibe Coding Portfolio",
+        category: "Agentic Engineering & CI/CD",
         description: "Arquitetura e deploy de um portfólio interativo utilizando agentes autônomos de IA (Antigravity). Foco em engenharia de prompt cirúrgica para otimização de tokens, componentização em Next.js e esteira automatizada de CI/CD via Vercel.",
         codeSnippet: `// Otimização de contexto para o agente de IA
-const deployToProduction = async (codebase) => {
+const deployToProduction = async (codebase: any) => {
   const optimizedPrompt = promptBudget.minimizeTokens(codebase.thinking);
   const build = await antigravity.executeRefactor(optimizedPrompt);
   return vercel.triggerAutomatedDeploy(build);
@@ -199,7 +233,7 @@ const deployToProduction = async (codebase) => {
           "Sincronizando repositório com o GitHub...",
           "Deploy concluído com sucesso na Vercel: https://portfolio-pm-ai.vercel.app/"
         ],
-      }
-    ]
-  }
+      },
+    ],
+  },
 };

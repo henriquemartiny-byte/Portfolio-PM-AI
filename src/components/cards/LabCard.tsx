@@ -1,7 +1,23 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Code2, Terminal, ChevronLeft, ChevronRight, Sliders, CheckCircle2, AlertTriangle, ArrowUpRight } from 'lucide-react';
+import { 
+  Sparkles, 
+  Code2, 
+  Terminal, 
+  ChevronLeft, 
+  ChevronRight, 
+  Sliders, 
+  CheckCircle2, 
+  AlertTriangle, 
+  ArrowUpRight,
+  Disc,
+  Bot,
+  Cpu,
+  FileText,
+  RefreshCw,
+  GitBranch
+} from 'lucide-react';
 import BentoCard from '../BentoCard';
 
 export default function LabCard({ delay = 0 }: { delay?: number }) {
@@ -11,13 +27,66 @@ export default function LabCard({ delay = 0 }: { delay?: number }) {
   const [isSimulating, setIsSimulating] = useState(false);
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
 
-  // Acervo de experimentos do Lab
+  // Acervo de experimentos do Lab: 1º Vinil, 2º Marvin, 3º Vibe Coding
   const experiments = [
     {
+      title: "Vinyl AI Collection Hub",
+      category: "Jamstack & Edge AI",
+      description: "Arquitetura Jamstack híbrida com Spotify Web API e Gemini para catalogar e explorar acervos físicos de vinil. Recomendações contextuais de sommelier e contextualização cultural de cada prensagem com custo zero de infraestrutura.",
+      slug: "catalogo-vinyl",
+      code: `// Integração do Sommelier com Spotify API e Google Gemini
+const getVinylDetails = async (album: string, artist: string) => {
+  const meta = await spotify.searchAlbum(album, artist);
+  const wiki = await wikipedia.getSummary(album, artist);
+  const story = await gemini.generateStory(album, artist, wiki);
+  return { ...meta, story };
+};`,
+      logs: [
+        "Inicializando módulo de catalogação física...",
+        "Autenticando na API do Spotify com client credentials...",
+        "Conectando com o modelo Gemini 2.5 Flash via Edge Runtime...",
+        "Indexando banco local via collection.json...",
+        "Vinyl AI Sommelier pronto para receber interações."
+      ]
+    },
+    {
+      title: "Marvin: Agente de Organização Pessoal",
+      category: "Autonomous Agent & Chief of Staff",
+      description: "Agente autônomo local e Chief of Staff pessoal calibrado com a personalidade de Marvin, o Androide Paranoico (O Guia do Mochileiro das Galáxias, de Douglas Adams). Orquestra rotinas, conciliação financeira e esteiras de desenvolvimento através de pipelines determinísticos no sistema operacional, APIs do Google e engenharia de contexto rigorosa.",
+      slug: "marvin-agent",
+      code: `// Runtime do Agente Autônomo Marvin (OS + APIs + Contexto)
+export async function runMarvinCycle(context: LocalWorkspace) {
+  // 1. Context Engineering determinístico via Markdown canônico
+  const backlog = await readCanonicalMarkdown('./00-Raiz/BACKLOG.md');
+  
+  // 2. Parser algorítmico de faturas financeiras
+  const pdfStatements = await parseFinancialPDFs('./06-pessoal-patrimonio/Faturas/');
+  const reconciled = reconcileTransactions(pdfStatements, backlog.budget);
+
+  // 3. Sincronização bidirecional OAuth2 com Google Tasks API
+  await googleTasks.syncPendingItems(backlog.tasks, { purgeCompleted: true });
+
+  // 4. Automação Git CLI: commits semânticos e espelhamento em nuvem
+  await git.commitAndPush('chore(sync): automated backlog & cloud mirror');
+  return { status: 'Operação concluída com sucesso. Embora ninguém vá me agradecer.' };
+}`,
+      logs: [
+        "Marvin OS inicializado. 'Cérebro do tamanho de um planeta e me colocam para ordenar tarefas...'",
+        "Lendo contexto estruturado em 00-Raiz/BACKLOG.md (zero alucinações)...",
+        "Executando pdf-parse em faturas de cartão de crédito e conciliando lançamentos...",
+        "Autenticando via OAuth2 e sincronizando lista com Google Tasks API...",
+        "Executando espelhamento determinístico com Google Drive...",
+        "Executando git add e git commit semântico via shell CLI...",
+        "Sprint sincronizada com sucesso. Suspiro existencial concluído."
+      ]
+    },
+    {
       title: "AI-Powered Vibe Coding Portfolio",
+      category: "Agentic Engineering & CI/CD",
       description: "Arquitetura e deploy de um portfólio interativo utilizando agentes autônomos de IA (Antigravity). Foco em engenharia de prompt cirúrgica para otimização de tokens, componentização em Next.js e esteira automatizada de CI/CD via Vercel.",
+      slug: "vibe-coding",
       code: `// Otimização de contexto para o agente de IA
-const deployToProduction = async (codebase) => {
+const deployToProduction = async (codebase: any) => {
   const optimizedPrompt = promptBudget.minimizeTokens(codebase.thinking);
   const build = await antigravity.executeRefactor(optimizedPrompt);
   return vercel.triggerAutomatedDeploy(build);
@@ -28,25 +97,6 @@ const deployToProduction = async (codebase) => {
         "Otimizando prompts de entrada para economia de tokens no plano Google AI Pro...",
         "Sincronizando repositório com o GitHub...",
         "Deploy concluído com sucesso na Vercel: https://portfolio-pm-ai.vercel.app/"
-      ]
-    },
-    {
-      title: "Vinyl AI Collection Hub",
-      description: "Arquitetura Jamstack híbrida com Spotify e Gemini para catalogar Meu acervos de discos de Vinil para recomendações baseadas em prompts com custo zero de produção.",
-      slug: "catalogo-vinyl",
-      code: `// Integração do Sommelier com a API do Spotify
-const getVinylDetails = async (album, artist) => {
-  const meta = await spotify.searchAlbum(album, artist);
-  const wiki = await wikipedia.getSummary(album, artist);
-  const story = await gemini.generateStory(album, artist, wiki);
-  return { ...meta, story };
-};`,
-      logs: [
-        "Inicializando módulo de catalogação física...",
-        "Autenticando na API do Spotify com credenciais de cliente...",
-        "Conectando com o modelo Gemini 2.5 Flash...",
-        "Indexando banco local via collection.json...",
-        "Vinyl AI Sommelier pronto para receber interações."
       ]
     }
   ];
@@ -62,7 +112,7 @@ const getVinylDetails = async (album, artist) => {
       setTimeout(() => {
         setConsoleLogs(prev => [...prev, log]);
         if (index === caseData.logs.length - 1) setIsSimulating(false);
-      }, (index + 1) * 700);
+      }, (index + 1) * 600);
     });
   };
 
@@ -72,7 +122,6 @@ const getVinylDetails = async (album, artist) => {
   const tokenSavings = genericTokenCost - optimizedTokenCost;
 
   return (
-    // Aumentamos para md:col-span-7 para dar o espaço necessário que o layout pede
     <BentoCard className="col-span-12 md:col-span-7 min-h-[500px]" delay={delay}>
       <div className="flex flex-col h-full gap-5">
         
@@ -91,21 +140,25 @@ const getVinylDetails = async (album, artist) => {
           {/* Controles de navegação (Estilo Carrossel) */}
           <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto bg-neutral-900/40 p-1.5 rounded-xl border border-neutral-900">
             <button
-              onClick={() => setActiveExpIndex(0)}
+              onClick={() => setActiveExpIndex(prev => Math.max(0, prev - 1))}
               className={`p-1.5 rounded-lg bg-neutral-950 transition-colors ${
                 activeExpIndex === 0 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-emerald-400 cursor-pointer'
               }`}
               disabled={activeExpIndex === 0}
+              aria-label="Experimento anterior"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="text-xs text-neutral-400 font-mono px-1">{activeExpIndex + 1} / 2</span>
+            <span className="text-xs text-neutral-400 font-mono px-1">
+              {activeExpIndex + 1} / {experiments.length}
+            </span>
             <button
-              onClick={() => setActiveExpIndex(1)}
+              onClick={() => setActiveExpIndex(prev => Math.min(experiments.length - 1, prev + 1))}
               className={`p-1.5 rounded-lg bg-neutral-950 transition-colors ${
-                activeExpIndex === 1 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-emerald-400 cursor-pointer'
+                activeExpIndex === experiments.length - 1 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-emerald-400 cursor-pointer'
               }`}
-              disabled={activeExpIndex === 1}
+              disabled={activeExpIndex === experiments.length - 1}
+              aria-label="Próximo experimento"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -118,10 +171,10 @@ const getVinylDetails = async (album, artist) => {
         </p>
 
         {/* SELETOR DE ABAS */}
-        <div className="flex items-center gap-4 border-b border-neutral-900 pb-px mt-2 overflow-x-auto whitespace-nowrap">
+        <div className="flex items-center gap-4 border-b border-neutral-900 w-full overflow-x-auto">
           <button
             onClick={() => setActiveTab('preview')}
-            className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer ${
+            className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer shrink-0 ${
               activeTab === 'preview' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300'
             }`}
           >
@@ -130,8 +183,8 @@ const getVinylDetails = async (album, artist) => {
           </button>
           <button
             onClick={() => setActiveTab('code')}
-            className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer ${
-              activeTab === 'code' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-zinc-500 hover:text-neutral-300'
+            className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer shrink-0 ${
+              activeTab === 'code' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300'
             }`}
           >
             <Code2 className="w-4 h-4" />
@@ -139,7 +192,7 @@ const getVinylDetails = async (album, artist) => {
           </button>
           <button
             onClick={() => setActiveTab('console')}
-            className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer ${
+            className={`flex items-center gap-2 text-sm font-medium pb-3 px-1 border-b-2 transition-colors cursor-pointer shrink-0 ${
               activeTab === 'console' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300'
             }`}
           >
@@ -154,7 +207,8 @@ const getVinylDetails = async (album, artist) => {
             
             {/* TAB 1: PREVIEW INTERATIVO */}
             {activeTab === 'preview' && (
-              activeExpIndex === 1 ? (
+              activeExpIndex === 0 ? (
+                /* CASO 0: VINYL AI COLLECTION HUB */
                 <motion.div
                   key="preview-vinyl-ai"
                   initial={{ opacity: 0, y: 10 }}
@@ -162,8 +216,12 @@ const getVinylDetails = async (album, artist) => {
                   exit={{ opacity: 0, y: -10 }}
                   className="flex flex-col items-center justify-center text-center p-6 w-full flex-1 gap-5"
                 >
+                  <div className="flex items-center gap-3 bg-neutral-900/60 px-4 py-2 rounded-full border border-neutral-800">
+                    <Disc className="w-4 h-4 text-emerald-400 animate-spin" style={{ animationDuration: '6s' }} />
+                    <span className="text-xs font-mono text-neutral-300">5 Discos Físicos • Spotify API • Gemini Sommelier</span>
+                  </div>
                   <p className="text-neutral-400 text-sm max-w-md leading-relaxed">
-                    Experimente a interface completa do catálogo retrofuturista com o sommelier inteligente de vinis.
+                    Experimente a interface completa do catálogo retrofuturista com o sommelier inteligente de vinis e storytelling cultural.
                   </p>
                   <Link
                     href="/lab/catalogo-vinyl"
@@ -173,9 +231,75 @@ const getVinylDetails = async (album, artist) => {
                     <ArrowUpRight className="w-4 h-4" />
                   </Link>
                 </motion.div>
-              ) : (
+              ) : activeExpIndex === 1 ? (
+                /* CASO 1: MARVIN AGENTE DE ORGANIZAÇÃO PESSOAL */
                 <motion.div
-                  key="preview"
+                  key="preview-marvin"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="flex flex-col gap-4 w-full flex-1 justify-center"
+                >
+                  {/* Badge Persona Douglas Adams */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-neutral-900/50 border border-neutral-800/80 rounded-xl px-3.5 py-2.5">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <Bot className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span className="text-xs text-neutral-300 font-mono truncate">
+                        &ldquo;Cérebro do tamanho de um planeta e me colocam para ordenar tarefas...&rdquo;
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono text-emerald-400/90 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 shrink-0 self-start sm:self-auto">
+                      Douglas Adams • O Guia do Mochileiro
+                    </span>
+                  </div>
+
+                  {/* Grid dos 4 Pilares Técnicos */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3 flex flex-col gap-1.5 hover:border-emerald-500/30 transition-colors">
+                      <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-semibold">
+                        <Cpu className="w-3.5 h-3.5" />
+                        <span>Context Engineering</span>
+                      </div>
+                      <p className="text-[11px] text-neutral-400 leading-relaxed">
+                        Ancoragem determinística em Markdown canônico (<span className="text-neutral-200 font-mono">BACKLOG.md</span>), eliminando alucinações sem overhead de vetores.
+                      </p>
+                    </div>
+
+                    <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3 flex flex-col gap-1.5 hover:border-teal-500/30 transition-colors">
+                      <div className="flex items-center gap-2 text-teal-400 font-mono text-xs font-semibold">
+                        <FileText className="w-3.5 h-3.5" />
+                        <span>Parser Algorítmico (PDF)</span>
+                      </div>
+                      <p className="text-[11px] text-neutral-400 leading-relaxed">
+                        Extração atômica de faturas com <span className="text-neutral-200 font-mono">pdf-parse</span>, classificação de gastos e conciliação bancária sem digitação manual.
+                      </p>
+                    </div>
+
+                    <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3 flex flex-col gap-1.5 hover:border-cyan-500/30 transition-colors">
+                      <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold">
+                        <RefreshCw className="w-3.5 h-3.5" />
+                        <span>OAuth2 & Google APIs</span>
+                      </div>
+                      <p className="text-[11px] text-neutral-400 leading-relaxed">
+                        Sincronização bidirecional em tempo real com Google Tasks API e espelhamento determinístico no Google Drive.
+                      </p>
+                    </div>
+
+                    <div className="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-3 flex flex-col gap-1.5 hover:border-indigo-500/30 transition-colors">
+                      <div className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-semibold">
+                        <GitBranch className="w-3.5 h-3.5" />
+                        <span>Git CLI & Automação OS</span>
+                      </div>
+                      <p className="text-[11px] text-neutral-400 leading-relaxed">
+                        Agente conectado ao shell local: geração de commits semânticos, resolução de tarefas, lint e verificação de deploys.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                /* CASO 2: VIBE CODING TOKEN SIMULATOR */
+                <motion.div
+                  key="preview-vibe"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
@@ -281,7 +405,7 @@ const getVinylDetails = async (album, artist) => {
               }`}
             >
               <Terminal className="w-3.5 h-3.5" />
-              {isSimulating ? "Executando Testes de Build..." : "Executar Simulação de Log"}
+              {isSimulating ? "Executando Pipeline..." : "Executar Simulação de Log"}
             </button>
           </div>
         </div>
